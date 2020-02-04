@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://freeletics.github.com/flowredux/docs/contributing/</loc>
-     <lastmod>2020-02-03</lastmod>
+     <loc>https://freeletics.github.com/flowredux/</loc>
+     <lastmod>2020-02-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://freeletics.github.com/flowredux/docs/dsl/</loc>
-     <lastmod>2020-02-03</lastmod>
+     <loc>https://freeletics.github.com/flowredux/contributing/</loc>
+     <lastmod>2020-02-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://freeletics.github.com/flowredux/docs/multiplatform/</loc>
-     <lastmod>2020-02-03</lastmod>
+     <loc>https://freeletics.github.com/flowredux/dsl/</loc>
+     <lastmod>2020-02-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://freeletics.github.com/flowredux/multiplatform/</loc>
+     <lastmod>2020-02-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
