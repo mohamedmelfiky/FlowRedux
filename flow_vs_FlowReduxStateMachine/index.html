@@ -13,7 +13,7 @@
         <meta name="description" content="Kotlin Multiplatform library to create state machines">
       
       
-        <link rel="canonical" href="https://freeletics.github.com/flowredux/multiplatform/">
+        <link rel="canonical" href="https://freeletics.github.com/flowredux/flow_vs_FlowReduxStateMachine/">
       
       
         <meta name="author" content="Freeletics">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Multiplatform - FlowRedux</title>
+        <title>FlowReduxStateMachine vs .reduxStore() - FlowRedux</title>
       
     
     
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#multiplatform" tabindex="1" class="md-skip">
+      <a href="#flowreduxstatemachine-vs-reduxstore" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,7 +119,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Multiplatform
+                FlowReduxStateMachine vs .reduxStore()
               
             </span>
           
@@ -264,11 +264,56 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../flow_vs_FlowReduxStateMachine/" title="FlowReduxStateMachine vs .reduxStore()" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        FlowReduxStateMachine vs .reduxStore()
+      </label>
+    
+    <a href="./" title="FlowReduxStateMachine vs .reduxStore()" class="md-nav__link md-nav__link--active">
       FlowReduxStateMachine vs .reduxStore()
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flowreduxstatemachine" class="md-nav__link">
+    FlowReduxStateMachine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduxstore" class="md-nav__link">
+    .reduxStore()
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -288,20 +333,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="Multiplatform" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../multiplatform/" title="Multiplatform" class="md-nav__link">
       Multiplatform
     </a>
-    
   </li>
 
     
@@ -1378,6 +1414,29 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flowreduxstatemachine" class="md-nav__link">
+    FlowReduxStateMachine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduxstore" class="md-nav__link">
+    .reduxStore()
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1388,11 +1447,73 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/freeletics/FlowRedux/edit/master/docs/multiplatform.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/freeletics/FlowRedux/edit/master/docs/flow_vs_FlowReduxStateMachine.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="multiplatform">Multiplatform<a class="headerlink" href="#multiplatform" title="Permanent link">&para;</a></h1>
-<p>To be done.</p>
+                <h1 id="flowreduxstatemachine-vs-reduxstore">FlowReduxStateMachine vs .reduxStore()<a class="headerlink" href="#flowreduxstatemachine-vs-reduxstore" title="Permanent link">&para;</a></h1>
+<p>The DSL provided by FlowRedux can be use int two ways:</p>
+<ol>
+<li>Extending from <code>FlowReduxStateMachine</code></li>
+<li>Use <code>.reduxStore()</code> which is a custom operator on Kotlin&rsquo;s <code>Flow</code> type.</li>
+</ol>
+<h2 id="flowreduxstatemachine">FlowReduxStateMachine<a class="headerlink" href="#flowreduxstatemachine" title="Permanent link">&para;</a></h2>
+<p>This is probably the easiest way to get started writing a State Machine with FlowRedux DSL.</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">InitialState</span><span class="p">){</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="c1">// Your DSL goes inside this spec block.</span>
+            <span class="c1">// Example:</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">State1</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onAction</span><span class="p">&lt;</span><span class="n">Action1</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+
+<p>See <a href="../dsl/">DSL section</a> for more information how to use the DSL.</p>
+<p>The advantage of extending from <code>FlowReduxStateMachine</code> is that you get a ready a base template
+where you just have to fill in the DSL part inside the <code>spec { ... }</code> block.
+By extending from <code>FlowReduxStateMachine</code> your StateMachine inherits a <code>dispatch(action : Action)</code>
+method to dispatch Actions to your state machine and a <code>val state: Flow&lt;State&gt;</code> to observe your
+state machine&rsquo;s state.
+Whenever the state changes, the latest State will be emitted to this <code>Flow</code>.</p>
+<h2 id="reduxstore">.reduxStore()<a class="headerlink" href="#reduxstore" title="Permanent link">&para;</a></h2>
+<p>If you want to work with Flow type directly FlowRedux provides you a custom operator called
+<code>.reduxStore()</code>.
+It is a custom operator like any other Flow operator like <code>Flow.map { ... }</code>.
+The idea is that the upstream Flow brings the actions to your FlowReduxStore like this:</p>
+<div class="codehilite"><pre><span></span><span class="k">sealed</span> <span class="k">class</span> <span class="nc">Action</span><span class="p">{</span>
+    <span class="k">object</span> <span class="nc">Action1</span> <span class="p">:</span> <span class="n">MyAction</span><span class="p">()</span>
+    <span class="k">object</span> <span class="nc">Action2</span> <span class="p">:</span> <span class="n">MyAction</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">//</span>
+<span class="c1">// Example</span>
+<span class="c1">//</span>
+
+<span class="k">val</span> <span class="py">actionFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">flowOf</span> <span class="p">{</span>
+<span class="c1">// Let&#39;s assume</span>
+    <span class="n">emit</span><span class="p">(</span><span class="n">Action1</span><span class="p">)</span>
+    <span class="n">delay</span><span class="p">(</span><span class="m">2000</span><span class="p">)</span>
+    <span class="n">emit</span><span class="p">(</span><span class="n">Action2</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">val</span> <span class="py">stateFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">actionFlow</span> <span class="c1">// actionFlow is the input actions to the state machine</span>
+    <span class="p">.</span><span class="n">reduxStore</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">,</span> <span class="n">State</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="c1">// Your DSL goes inside this spec block.</span>
+        <span class="c1">// Example:</span>
+        <span class="n">inState</span><span class="p">&lt;</span><span class="n">State1</span><span class="p">&gt;</span> <span class="p">{</span>
+            <span class="n">onAction</span><span class="p">&lt;</span><span class="n">Action1</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="n">stateFlow</span><span class="p">.</span><span class="n">collect</span> <span class="p">{</span> <span class="n">state</span> <span class="p">-&gt;</span>
+    <span class="n">updateUi</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
                 
                   
                 
@@ -1414,7 +1535,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../logging/" title="Logging" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../dsl/" title="DSL" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1423,19 +1544,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Logging
+                DSL
               </span>
             </div>
           </a>
         
         
-          <a href="../Javadoc/dsl/" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../logging/" title="Logging" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Index
+                Logging
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
