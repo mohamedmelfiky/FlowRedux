@@ -322,6 +322,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#observe" class="md-nav__link">
+    observe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setstate" class="md-nav__link">
     SetState
   </a>
@@ -1507,6 +1514,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#observe" class="md-nav__link">
+    observe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setstate" class="md-nav__link">
     SetState
   </a>
@@ -1803,6 +1817,47 @@ On zero we call <code>setState { LoadingState }</code> to do the state transitio
 <p><code>observeWhileInState(anyFlow) { value, getState, setState -&gt; ... }</code> has 3 parameters:
 <code>value</code> is the value emitted by the flow, <a href="#getstate">getState</a> to get the current state and <a href="#setState">setState</a> to do a state transition.</p>
 <p>In contrast to <code>onEnter</code> and <code>on&lt;Action&gt;</code> block <code>observeWhileInState()</code> block stops the execution once the state machine is not in the original <code>inState&lt;State&gt;</code> anymore.</p>
+<h2 id="observe">observe<a class="headerlink" href="#observe" title="Permanent link">&para;</a></h2>
+<p>If for whatever reason you want to trigger a state change out of  <code>inState&lt;&gt;</code>, <code>onEnter { ... }</code>, <code>on&lt;Action&gt;</code> or <code>observeWhileInState { ... }</code> by observing a <code>Flow</code> then <code>observe</code> is what you are looking for:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="p">...</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="p">...</span>
+               <span class="p">}</span>
+
+               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="p">...</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">val</span> <span class="py">aFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">flowOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)</span>
+            <span class="n">observe</span><span class="p">(</span> <span class="n">aFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                <span class="c1">// Will trigger anytime flow emits a value</span>
+                <span class="p">...</span>
+            <span class="p">}</span>
+
+            <span class="n">observe</span><span class="p">(</span> <span class="n">anotherFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                <span class="c1">// Will trigger anytime flow emits a value</span>
+               <span class="p">...</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><code>observe()</code> is like <code>observeWhileInState()</code> just that it is not bound to the current state like <code>observeWhileInState()</code> is.
+<code>observe()</code> will stop collecting the passed in Flow only if the CoroutineScope of the whole FlowReduxStateMachine gets canceled.</p>
 <h2 id="setstate">SetState<a class="headerlink" href="#setstate" title="Permanent link">&para;</a></h2>
 <p>As you probably have already noticed from the sections above <code>setState</code> is a way to make you state machine transition to another state.
 You can think of <code>SetState</code> as a function that gets the current state as input parameter and returns
