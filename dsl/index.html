@@ -309,6 +309,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#observewhileinstate" class="md-nav__link">
+    observeWhileInState()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1487,6 +1494,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#observewhileinstate" class="md-nav__link">
+    observeWhileInState()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1613,7 +1627,7 @@ Next let&rsquo;s discuss what an <code>inState</code> can contain as triggers to
 <p>What do we want to do when we enter the <code>LoadingState</code>?
 We want to do the http request, right?
 Let&rsquo;s do that by extending our example:</p>
-<p><div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
 <span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
 
@@ -1634,7 +1648,8 @@ Let&rsquo;s do that by extending our example:</p>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-There are a some new things like  <code>onEnter</code>, <code>getState</code> and <code>setState</code>. We will cover <code>getState</code> and <code>setState</code> in dedicated sections. 
+
+<p>There are a some new things like  <code>onEnter</code>, <code>getState</code> and <code>setState</code>. We will cover <a href="#getstate">getState</a> and <a href="#setstate">setState</a> in dedicated sections.
 All you have to know about <code>setState</code> for now is that this is the way to set the next state in your state machine.
 Let&rsquo;s talk about <code>onEnter</code>:</p>
 <ul>
@@ -1651,7 +1666,7 @@ You can totally run here long running and expensive calls (like doing an http re
 <span class="p">}</span>
 </pre></div>
  <code>doA()</code> and <code>doSomethingLongRunning()</code> are still executed even if <code>setState { ... }</code> which got executed before causes our state machine to move to the next state.
- The takeaway is: the full <code>onEnter { ... }</code> block will be executed once a state has been entered (there is an exception, we will talk about that in <code>FlatMapPolicy</code> section).</li>
+ The takeaway is: the full <code>onEnter { ... }</code> block will be executed once a state has been entered (there is an exception, we will talk about that in <a href="#flatmappolicy">FlatMapPolicy</a> section).</li>
 </ul>
 <h3 id="onaction">on<code>&lt;Action&gt;</code><a class="headerlink" href="#onaction" title="Permanent link">&para;</a></h3>
 <p>How do we deal with external user input like clicks in FlowRedux? 
@@ -1694,9 +1709,177 @@ Let&rsquo;s extend our FlowReduxStateMachine to react on such an action if the c
 <span class="p">}</span>
 </pre></div>
 
+<p>A <code>on { ... }</code> block gets 3 parameters:  <code>action</code> which is the actual instance of the <code>Action</code> that
+triggered this block and <code>setState</code> and <code>getState</code> which you have also seen in <code>onEnter { ... }</code> block.
+<code>on { ... }</code> is actually pretty similar to <code>onEnter {...}</code> just with a different &ldquo;trigger&rdquo; (action vs. entering a state).
+Furthermore, <code>on { ... }</code> has the same characteristics as <code>onEnter { ... }</code>:</p>
+<ul>
+<li><strong><code>on&lt;MyAction&gt; { ... }</code> is running asynchronously in a coroutine</strong>.
+You can totally run here long running and expensive calls (like doing an http request).</li>
+<li><strong><code>on&lt;MyAction&gt; { ... }</code> doesn&rsquo;t get canceled</strong> when the state machine transitioned to another state original state.
+See <a href="#onenter">onEnter</a> section for more details.</li>
+</ul>
+<h3 id="observewhileinstate">observeWhileInState()<a class="headerlink" href="#observewhileinstate" title="Permanent link">&para;</a></h3>
+<p>This one is useful if you want to collect a <code>Flow</code> only while being exactly in that state.
+To give a concrete example how this is useful let&rsquo;s extend our example from above.
+Let&rsquo;s say whenever our state machine is in <code>ErrorState</code> we want to retry loading the items after
+3 seconds in <code>ErrorState</code> or anytime before the 3 seconds have elapsed if the user clicks the retry button.
+Furthermore the 3 seconds countdown timer should be displayed in our app:</p>
+<p>To implement this let&rsquo;s first extend our <code>ErrorState</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">data</span> <span class="k">class</span> <span class="nc">ErrorState</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">cause</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">countdown</span> <span class="p">:</span> <span class="n">Int</span>    <span class="c1">// This value is decreased from 3 then 2 then 1 and represents the countdown value.</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">State</span><span class="p">()</span>
+</pre></div>
+
+<p>Now let&rsquo;s add some countdown capabilities to our state machine by using <code>observeWhileInState()</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// we entered the LoadingState, so let&#39;s do the http request</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ShowContentState</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ErrorState</span><span class="p">(</span><span class="n">cause</span> <span class="p">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">countdown</span> <span class="p">=</span> <span class="m">3</span><span class="p">)</span> <span class="p">}</span> <span class="c1">// Countdown starts with 3 seconds</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span>
+               <span class="p">}</span>
+
+               <span class="k">val</span> <span class="py">timer</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">timerThatEmitsEverySecond</span><span class="p">()</span>
+               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// This block triggers every time the timer emits</span>
+                    <span class="c1">// which happens every second</span>
+                    <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="k">is</span> <span class="n">ErrorState</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">countdownTimeLeft</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">countdown</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">countdownTimeLeft</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+                            <span class="n">setState</span> <span class="p">{</span> <span class="n">state</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">countdown</span> <span class="p">=</span> <span class="n">countdownTimeLeft</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">}</span> <span class="c1">//  decrease the countdown by 1 second</span>
+                        <span class="k">else</span>
+                            <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span> <span class="c1">// transition to the LoadingState</span>
+                    <span class="p">}</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">timerThatEmitsEverySecond</span><span class="p">()</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="py">timeElapsed</span> <span class="p">=</span> <span class="m">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">isActive</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// is Flow still active?</span>
+            <span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>     <span class="c1">// wait 1 second</span>
+            <span class="n">timeElapsed</span><span class="p">++</span>
+            <span class="n">emit</span><span class="p">(</span><span class="n">timeElapsed</span><span class="p">)</span> <span class="c1">// Flow Emits value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Let&rsquo;s look at the source code above step by step.
+Whenever we are in <code>LoadingState</code> and an error occurs while loading the items we go into
+<code>ErrorState</code>. Nothing new.
+What is new is that <code>ErrorState</code> contains an additional field  <code>countdown</code> which we set on
+transitioning from <code>LoadingState</code> to <code>ErrorState(countdown = 3)</code> (means 3 seconds left).</p>
+<p>We extend <code>inState&lt;ErrorState&gt; { ... }</code> block and add a <code>observeWhileInState(timer)</code>.
+<code>timer</code> is a <code>Flow&lt;Int&gt;</code> that emits a new (incremented) number every second.
+<code>observeWhileInState(timer)</code> calls <code>.collect {...}</code> on the timer flow and executes the block with the
+parameters <code>value</code>, <code>getState</code> and <code>setState</code> every time <code>timer</code> emits a new value.
+In other words: instead of calling <code>timer.collect { ... }</code> you call <code>observeWhileInState(timer) { ... }</code> to collect the Flow&rsquo;s values as long as the state machine is in that state.</p>
+<p>But here is the deal: it automatically cancels the timer once the state machine transitioned away from
+<code>ErrorState</code> into another state.
+This happens either when the user clicks on the retry button and causes <code>on&lt;RetryLoadingAction&gt;</code> to be dispatched
+or when 3 seconds have elapsed.
+To keep track how many seconds are left we decrease <code>ErrorState.countdown</code> field after every second until we reached zero.
+On zero we call <code>setState { LoadingState }</code> to do the state transition.</p>
+<p><code>observeWhileInState(anyFlow) { value, getState, setState -&gt; ... }</code> has 3 parameters:
+<code>value</code> is the value emitted by the flow, <a href="#getstate">getState</a> to get the current state and <a href="#setState">setState</a> to do a state transition.</p>
+<p>In contrast to <code>onEnter</code> and <code>on&lt;Action&gt;</code> block <code>observeWhileInState()</code> block stops the execution once the state machine is not in the original <code>inState&lt;State&gt;</code> anymore.</p>
 <h2 id="setstate">SetState<a class="headerlink" href="#setstate" title="Permanent link">&para;</a></h2>
+<p>As you probably have already noticed from the sections above <code>setState</code> is a way to make you state machine transition to another state.
+You can think of <code>SetState</code> as a function that gets the current state as input parameter and returns
+the new State:</p>
+<div class="codehilite"><pre><span></span><span class="k">fun</span> <span class="nf">setState</span> <span class="p">(</span><span class="n">currentState</span> <span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="p">:</span> <span class="n">State</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">newState</span> <span class="p">:</span> <span class="n">State</span> <span class="p">=</span>  <span class="p">...</span> <span class="c1">// compute new state somehow</span>
+    <span class="k">return</span> <span class="n">newState</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Due to some kotlin language restriction <code>SetState</code> is actually a <code>class</code> and not just a function but that doesn&rsquo;t have to bother you as it is an implementation detail of FlowRedux.
+You can totally think of it as a function <code>(State) -&gt; State</code>.</p>
+<p>One important thing you have to know about FlowRedux in general is that FlowRedux is running async.
+That means that there might be multiple <code>setState { ... }</code> in the queue trying to change the state (but only 1 SetState will be actually executed at the same time).</p>
+<p>This means that it is possible that on <code>setState { ... }</code> execution the state is actually not in the same state anymore as you would have expected.
+Per default FlowRedux will check if the state is still the expected one and if it isn&rsquo;t <code>setState {...}</code> wont run.</p>
+<p>If you want to override this behavior you can do that by providing an additional parameter <code>runIf</code> and return true if FlowRedux should run setState, otherwise false.</p>
+<div class="codehilite"><pre><span></span><span class="n">setState</span><span class="p">(</span><span class="n">runIf</span> <span class="p">=</span> <span class="p">{</span> <span class="n">currentState</span> <span class="p">-&gt;</span> <span class="n">currentState</span> <span class="k">is</span> <span class="n">FooState</span> <span class="p">})</span> <span class="p">{</span> <span class="n">currentState</span> <span class="p">-&gt;</span>
+    <span class="c1">// executed only if runIf returns true</span>
+    <span class="n">OtherState</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For example if you want to force setState to run always you can do the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">setState</span><span class="p">(</span><span class="n">runIf</span> <span class="p">=</span> <span class="p">{</span> <span class="k">true</span> <span class="p">})</span> <span class="p">{</span> <span class="n">currentState</span> <span class="p">-&gt;</span>
+    <span class="n">OtherState</span>
+<span class="p">}</span>
+</pre></div>
+
 <h2 id="getstate">GetState<a class="headerlink" href="#getstate" title="Permanent link">&para;</a></h2>
+<p>If you need in any block the current state <code>GetState</code> is your friend.
+It is actually just a function that you can invoke that returns you the current state of your state machine.</p>
 <h2 id="flatmappolicy">FlatMapPolicy<a class="headerlink" href="#flatmappolicy" title="Permanent link">&para;</a></h2>
+<p>Have you ever wondered what would happen if you would execute <code>Action</code> very fast 1 after another?
+For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">spec</span> <span class="p">{</span>
+    <span class="n">inState</span><span class="p">&lt;</span><span class="n">FooState</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">on</span><span class="p">&lt;</span><span class="n">BarAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+            <span class="n">delay</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span> <span class="c1">// wait for 5000 seconds</span>
+            <span class="n">setState</span> <span class="p">{</span> <span class="n">OtherState</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>The example above shows a problem with async. state machines like FlowRedux:
+If we our state machine is in <code>FooState</code> and a <code>BarAction</code> got triggered, we wait for 5 seconds and then set the state to another state.
+What if while waiting 5 seconds (i.e. let&rsquo;s say after 3 seconds of waiting) another <code>BarAction</code> gets triggered.
+That is possible right?
+With <code>FlatMapPolicy</code> you can specify what should happen in that case.
+There are three options to choose from:</p>
+<ul>
+<li><code>LATEST</code>: This is the default one. It would cancel any previous execution and just run the latest one.
+In the example above it would mean while waiting 5 seconds another <code>BarAction</code> gets triggered, the first execution of <code>on&lt;BarAction&gt;</code> block gets stopped and a new <code>on&lt;BarAction&gt;</code> block starts.</li>
+<li><code>MERGE</code>: Choosing this causes all the blocks to continue running but there are no guarantees in which order. For example:
+<div class="codehilite"><pre><span></span><span class="n">spec</span> <span class="p">{</span>
+    <span class="n">inState</span><span class="p">&lt;</span><span class="n">FooState</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="n">on</span><span class="p">&lt;</span><span class="n">BarAction</span><span class="p">&gt;(</span><span class="n">flatMapPolicy</span> <span class="p">=</span> <span class="n">FlapMapPolicy</span><span class="p">.</span><span class="n">MERGE</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+            <span class="n">delay</span><span class="p">(</span> <span class="n">randomInt</span><span class="p">()</span> <span class="p">)</span> <span class="c1">// wait for some random time</span>
+            <span class="n">setState</span> <span class="p">{</span> <span class="n">OtherState</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+Let&rsquo;s assume that  we trigger two times <code>BarAction</code>.
+We use random amount of seconds for waiting.
+Since we use <code>MERGE</code> <code>on&lt;BarAction&gt;</code> block gets executed 2 times without canceling the previous one (that is the difference to <code>LATEST</code>).
+Moreover, <code>MERGE</code> doesn&rsquo;t make any promise on order of execution of the block (see <code>CONCAT</code> if you need promises on order).
+So if <code>on&lt;BarAction&gt;</code> gets executed two times it will run in parallel and the the second execution could complete before the first execution (because using a random time of waiting).</li>
+<li><code>CONCAT</code>: In contrast to <code>MERGE</code> and <code>LATEST</code> <code>CONCAT</code> will not run <code>on&lt;BarAction&gt;</code> in parallel and will not cancel any previous execution. Instead, <code>CONCAT</code> will preserve the order and execute one block after another.</li>
+</ul>
+<p>All execution blocks can specify a <code>FlatMapPolicy</code>:</p>
+<ul>
+<li><code>on&lt;Action&gt;(flatMapPolicy = FlatMapPolicy.LATEST){... }</code></li>
+<li><code>onEnter(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
+<li><code>observeWhileInState(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
+</ul>
                 
                   
                 

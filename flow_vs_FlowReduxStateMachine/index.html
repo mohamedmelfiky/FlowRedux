@@ -1489,20 +1489,16 @@ The idea is that the upstream Flow brings the actions to your FlowReduxStore lik
     <span class="k">object</span> <span class="nc">Action1</span> <span class="p">:</span> <span class="n">MyAction</span><span class="p">()</span>
     <span class="k">object</span> <span class="nc">Action2</span> <span class="p">:</span> <span class="n">MyAction</span><span class="p">()</span>
 <span class="p">}</span>
+</pre></div>
 
-<span class="c1">//</span>
-<span class="c1">// Example</span>
-<span class="c1">//</span>
-
-<span class="k">val</span> <span class="py">actionFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">flowOf</span> <span class="p">{</span>
-<span class="c1">// Let&#39;s assume</span>
+<div class="codehilite"><pre><span></span><span class="k">val</span> <span class="py">actionFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">flowOf</span> <span class="p">{</span>
     <span class="n">emit</span><span class="p">(</span><span class="n">Action1</span><span class="p">)</span>
     <span class="n">delay</span><span class="p">(</span><span class="m">2000</span><span class="p">)</span>
     <span class="n">emit</span><span class="p">(</span><span class="n">Action2</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">val</span> <span class="py">stateFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">actionFlow</span> <span class="c1">// actionFlow is the input actions to the state machine</span>
-    <span class="p">.</span><span class="n">reduxStore</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">,</span> <span class="n">State</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">reduxStore</span><span class="p">&lt;</span><span class="n">Action</span><span class="p">,</span> <span class="n">State</span><span class="p">&gt;(</span><span class="n">IntialState</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Your DSL goes inside this spec block.</span>
         <span class="c1">// Example:</span>
         <span class="n">inState</span><span class="p">&lt;</span><span class="n">State1</span><span class="p">&gt;</span> <span class="p">{</span>
