@@ -302,8 +302,36 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#onaction" class="md-nav__link">
+    on&lt;Action&gt;
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setstate" class="md-nav__link">
+    SetState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getstate" class="md-nav__link">
+    GetState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flatmappolicy" class="md-nav__link">
+    FlatMapPolicy
+  </a>
   
 </li>
       
@@ -1452,8 +1480,36 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#onaction" class="md-nav__link">
+    on&lt;Action&gt;
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setstate" class="md-nav__link">
+    SetState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getstate" class="md-nav__link">
+    GetState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flatmappolicy" class="md-nav__link">
+    FlatMapPolicy
+  </a>
   
 </li>
       
@@ -1578,13 +1634,14 @@ Let&rsquo;s do that by extending our example:</p>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-There are a some new things like  <code>onEnter</code>, <code>getState</code> and <code>setState</code>.
-Let&rsquo;s first talk a bit about <code>onEnter</code>:</p>
+There are a some new things like  <code>onEnter</code>, <code>getState</code> and <code>setState</code>. We will cover <code>getState</code> and <code>setState</code> in dedicated sections. 
+All you have to know about <code>setState</code> for now is that this is the way to set the next state in your state machine.
+Let&rsquo;s talk about <code>onEnter</code>:</p>
 <ul>
 <li><strong><code>onEnter { ... }</code> is running asynchronously in a coroutine</strong>.
 That means whatever you do inside the <code>onEnter</code> block is not blocking anything else.
 You can totally run here long running and expensive calls (like doing an http request).</li>
-<li><strong><code>onEnter { ... }</code> doesn&rsquo;t get canceled</strong> when the original state got left. Example
+<li><strong><code>onEnter { ... }</code> doesn&rsquo;t get canceled</strong> when the state machine transitioned to another state original state. Example:
  <div class="codehilite"><pre><span></span><span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
    <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
        <span class="n">setState</span> <span class="p">{</span> <span class="n">ErrorState</span><span class="p">(</span><span class="n">Exception</span><span class="p">(</span><span class="s">&quot;Fake Exception&quot;</span><span class="p">)</span> <span class="p">}</span>
@@ -1596,6 +1653,50 @@ You can totally run here long running and expensive calls (like doing an http re
  <code>doA()</code> and <code>doSomethingLongRunning()</code> are still executed even if <code>setState { ... }</code> which got executed before causes our state machine to move to the next state.
  The takeaway is: the full <code>onEnter { ... }</code> block will be executed once a state has been entered (there is an exception, we will talk about that in <code>FlatMapPolicy</code> section).</li>
 </ul>
+<h3 id="onaction">on<code>&lt;Action&gt;</code><a class="headerlink" href="#onaction" title="Permanent link">&para;</a></h3>
+<p>How do we deal with external user input like clicks in FlowRedux? 
+This is what Actions are for. 
+In FlowRedux DSL you can react on Actions by using a <code>on&lt;MyAction&gt;{ ... }</code> block.</p>
+<p>In our example we want to retry loading if we are in <code>ErrorState</code> and the user clicks on a retry button. 
+Clicking on that button dispatches a <code>RetryLoadingAction</code> to our state machine.
+Let&rsquo;s extend our FlowReduxStateMachine to react on such an action if the current state is <code>ErrorState</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// we entered the LoadingState, so let&#39;s do the http request</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ShowContentState</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ErrorState</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1">// let&#39;s add a new inState{...} with an on{...} block </span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="c1">// This block triggers if we are in ErrorState </span>
+                  <span class="c1">// RetryLoadingAction has been dispatched to this state machine.</span>
+                  <span class="c1">// In that case we transition to LoadingState which then starts the http</span>
+                  <span class="c1">// request to load items.</span>
+
+                  <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2 id="setstate">SetState<a class="headerlink" href="#setstate" title="Permanent link">&para;</a></h2>
+<h2 id="getstate">GetState<a class="headerlink" href="#getstate" title="Permanent link">&para;</a></h2>
+<h2 id="flatmappolicy">FlatMapPolicy<a class="headerlink" href="#flatmappolicy" title="Permanent link">&para;</a></h2>
                 
                   
                 
