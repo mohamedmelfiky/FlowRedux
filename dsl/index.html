@@ -349,6 +349,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#best-practice" class="md-nav__link">
+    Best Practice
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-recommended-way" class="md-nav__link">
+    The recommended way
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -1541,6 +1561,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#best-practice" class="md-nav__link">
+    Best Practice
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-recommended-way" class="md-nav__link">
+    The recommended way
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -1935,6 +1975,137 @@ So if <code>on&lt;BarAction&gt;</code> gets executed two times it will run in pa
 <li><code>onEnter(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
 <li><code>observeWhileInState(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
 </ul>
+<h2 id="best-practice">Best Practice<a class="headerlink" href="#best-practice" title="Permanent link">&para;</a></h2>
+<p>One very important aspect of the DSL is to provide a readable and maintainable way to reason about your state machine.
+Let&rsquo; take a look at our example state machine:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// we entered the LoadingState, so let&#39;s do the http request</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ShowContentState</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">ErrorState</span><span class="p">(</span><span class="n">cause</span> <span class="p">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">countdown</span> <span class="p">=</span> <span class="m">3</span><span class="p">)</span> <span class="p">}</span> <span class="c1">// Countdown starts with 3 seconds</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span>
+               <span class="p">}</span>
+
+               <span class="k">val</span> <span class="py">timer</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">timerThatEmitsEverySecond</span><span class="p">()</span>
+               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// This block triggers every time the timer emits</span>
+                    <span class="c1">// which happens every second</span>
+                    <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="k">is</span> <span class="n">ErrorState</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">countdownTimeLeft</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">countdown</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">countdownTimeLeft</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+                            <span class="n">setState</span> <span class="p">{</span> <span class="n">state</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">countdown</span> <span class="p">=</span> <span class="n">countdownTimeLeft</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">}</span> <span class="c1">//  decrease the countdown by 1 second</span>
+                        <span class="k">else</span>
+                            <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span> <span class="c1">// transition to the LoadingState</span>
+                    <span class="p">}</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">timerThatEmitsEverySecond</span><span class="p">()</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="py">timeElapsed</span> <span class="p">=</span> <span class="m">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">isActive</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// is Flow still active?</span>
+            <span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>     <span class="c1">// wait 1 second</span>
+            <span class="n">timeElapsed</span><span class="p">++</span>
+            <span class="n">emit</span><span class="p">(</span><span class="n">timeElapsed</span><span class="p">)</span> <span class="c1">// Flow Emits value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Do you notice something?
+With more blocks we add the state machine itself gets harder to read, understand and maintain.
+What we are aiming for with the DSL is an overview about what the state machine is supposed to do on a high level that reads like as specification.
+If you take a look at the example from above, however, you will notice that it isn&rsquo;t easy to read and get bloated with implementation details.</p>
+<h3 id="the-recommended-way">The recommended way<a class="headerlink" href="#the-recommended-way" title="Permanent link">&para;</a></h3>
+<p>We recommend to keep the DSL really short, expressive, readable and maintainable.
+Therefore instead of having implementation details in your DSL we recommend to use function references instead.
+Let&rsquo;s refactor the example above to reflect this idea:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">//</span>
+    <span class="c1">// This is the specification of your state machine. Less implementation details, better readability.</span>
+    <span class="c1">//</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">LoadingState</span><span class="p">&gt;</span> <span class="p">{</span>
+                <span class="n">onEnter</span><span class="p">(</span><span class="o">::</span><span class="n">loadItemsAndMoveToContentOrErrorState</span><span class="p">)</span>
+            <span class="p">}</span>
+
+            <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="c1">// For a single line statement it&#39;s fine to keep it as a block instead of moving to a function reference</span>
+                  <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span>
+               <span class="p">}</span>
+
+               <span class="n">observeWhileInState</span><span class="p">(</span>
+                    <span class="n">timerThatEmitsEverySecond</span><span class="p">(),</span>
+                    <span class="o">::</span><span class="n">onSecondElapsedMoveToLoadingStateOrMoveToDecrementCountdown</span>
+               <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">//</span>
+    <span class="c1">// All the implementation details are in the functions below.</span>
+    <span class="c1">//</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">loadItemsAndMoveToContentOrErrorState</span><span class="p">(</span><span class="n">getState</span> <span class="p">:</span> <span class="n">StateAccessor</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span> <span class="n">setState</span> <span class="p">:</span> <span class="n">SetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;){</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
+            <span class="n">setState</span> <span class="p">{</span> <span class="n">ShowContentState</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">setState</span> <span class="p">{</span> <span class="n">ErrorState</span><span class="p">(</span><span class="n">cause</span> <span class="p">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">countdown</span> <span class="p">=</span> <span class="m">3</span><span class="p">)</span> <span class="p">}</span> <span class="c1">// Countdown starts with 3 seconds</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">onSecondElapsedMoveToLoadingStateOrMoveToDecrementCountdown</span><span class="p">(</span>
+        <span class="n">value</span> <span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+        <span class="n">getState</span> <span class="p">:</span> <span class="n">StateAccessor</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span>
+        <span class="n">setState</span> <span class="p">:</span> <span class="n">SetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;</span>
+    <span class="p">){</span>
+        <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="k">is</span> <span class="n">ErrorState</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">countdownTimeLeft</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">countdown</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">countdownTimeLeft</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+                <span class="n">setState</span> <span class="p">{</span> <span class="n">state</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">countdown</span> <span class="p">=</span> <span class="n">countdownTimeLeft</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">}</span> <span class="c1">//  decrease the countdown by 1 second</span>
+            <span class="k">else</span>
+                <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span> <span class="c1">// transition to the LoadingState</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">timerThatEmitsEverySecond</span><span class="p">()</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="py">timeElapsed</span> <span class="p">=</span> <span class="m">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">isActive</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// is Flow still active?</span>
+            <span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>     <span class="c1">// wait 1 second</span>
+            <span class="n">timeElapsed</span><span class="p">++</span>
+            <span class="n">emit</span><span class="p">(</span><span class="n">timeElapsed</span><span class="p">)</span> <span class="c1">// Flow Emits value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>By using function references you can read the DSL better and can zoom in into implementation
+details anytime you want to by looking into a function body.</p>
                 
                   
                 
