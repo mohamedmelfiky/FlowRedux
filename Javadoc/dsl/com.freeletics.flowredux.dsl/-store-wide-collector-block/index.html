@@ -13,7 +13,7 @@
         <meta name="description" content="Kotlin Multiplatform library to create state machines">
       
       
-        <link rel="canonical" href="https://freeletics.github.com/flowredux/Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/_sub-state-class/">
+        <link rel="canonical" href="https://freeletics.github.com/flowredux/Javadoc/dsl/com.freeletics.flowredux.dsl/-store-wide-collector-block/">
       
       
         <meta name="author" content="Freeletics">
@@ -37,18 +37,18 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../../../../../images/icon-freeletics.png">
+      <link rel="shortcut icon" href="../../../../images/icon-freeletics.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
-        <title>sub state class - FlowRedux</title>
+        <title>store wide collector block - FlowRedux</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.1b62728e.css">
       
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/application-palette.a8b3c06d.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -57,7 +57,7 @@
       
     
     
-      <script src="../../../../../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -66,10 +66,10 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../../../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../../../assets/fonts/material-icons.css">
     
     
-      <link rel="stylesheet" href="../../../../../css/app.css">
+      <link rel="stylesheet" href="../../../../css/app.css">
     
     
       
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#_substateclass" tabindex="1" class="md-skip">
+      <a href="#storewidecollectorblock" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -104,7 +104,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href="https://freeletics.github.com/flowredux/" title="FlowRedux" class="md-header-nav__button md-logo">
           
-            <img src="../../../../../images/icon-freeletics.png" width="24" height="24">
+            <img src="../../../../images/icon-freeletics.png" width="24" height="24">
           
         </a>
       </div>
@@ -119,7 +119,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                 sub state class
+                 store wide collector block
               
             </span>
           
@@ -196,7 +196,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href="https://freeletics.github.com/flowredux/" title="FlowRedux" class="md-nav__button md-logo">
       
-        <img src="../../../../../images/icon-freeletics.png" width="48" height="48">
+        <img src="../../../../images/icon-freeletics.png" width="48" height="48">
       
     </a>
     FlowRedux
@@ -230,7 +230,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../.." title="FlowRedux" class="md-nav__link">
+    <a href="../../../.." title="FlowRedux" class="md-nav__link">
       FlowRedux
     </a>
   </li>
@@ -242,7 +242,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../contributing/" title="Contributing" class="md-nav__link">
+    <a href="../../../../contributing/" title="Contributing" class="md-nav__link">
       Contributing
     </a>
   </li>
@@ -254,8 +254,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../dsl/" title="DSL" class="md-nav__link">
-      DSL
+    <a href="../../../../dsl/" title="DSL Guide" class="md-nav__link">
+      DSL Guide
     </a>
   </li>
 
@@ -266,7 +266,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../flow_vs_FlowReduxStateMachine/" title="FlowReduxStateMachine vs .reduxStore()" class="md-nav__link">
+    <a href="../../../../flow_vs_FlowReduxStateMachine/" title="FlowReduxStateMachine vs .reduxStore()" class="md-nav__link">
       FlowReduxStateMachine vs .reduxStore()
     </a>
   </li>
@@ -278,19 +278,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../logging/" title="Logging" class="md-nav__link">
-      Logging
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../../../../multiplatform/" title="Multiplatform" class="md-nav__link">
+    <a href="../../../../multiplatform/" title="Multiplatform" class="md-nav__link">
       Multiplatform
     </a>
   </li>
@@ -305,13 +293,13 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       Javadoc
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         Javadoc
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -326,95 +314,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1" checked>
     
-    <label class="md-nav__link" for="nav-7-1">
+    <label class="md-nav__link" for="nav-6-1">
       Dsl
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-1">
+      <label class="md-nav__title" for="nav-6-1">
         Dsl
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../com.freeletics.flowredux.dsl.flow/" title="Com.freeletics.flowredux.dsl.flow" class="md-nav__link">
-      Com.freeletics.flowredux.dsl.flow
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-3" type="checkbox" id="nav-7-1-3">
-    
-    <label class="md-nav__link" for="nav-7-1-3">
-      Alltypes
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-1-3">
-        Alltypes
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../alltypes/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4" type="checkbox" id="nav-7-1-4" checked>
-    
-    <label class="md-nav__link" for="nav-7-1-4">
-      Com.freeletics.flowredux.dsl
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-1-4">
-        Com.freeletics.flowredux.dsl
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -437,68 +344,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-in-state-observer-block/" title="in state observer block" class="md-nav__link">
-       in state observer block
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-in-state-on-enter-block/" title="in state on enter block" class="md-nav__link">
-       in state on enter block
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-in-state-side-effect-builder/" title="in state side effect builder" class="md-nav__link">
-       in state side effect builder
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-on-action-block/" title="on action block" class="md-nav__link">
-       on action block
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-store-wide-builder-block/" title="store wide builder block" class="md-nav__link">
-       store wide builder block
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-store-wide-observer-block/" title="store wide observer block" class="md-nav__link">
-       store wide observer block
+    <a href="../../com.freeletics.flowredux.dsl.flow/" title="Com.freeletics.flowredux.dsl.flow" class="md-nav__link">
+      Com.freeletics.flowredux.dsl.flow
     </a>
   </li>
 
@@ -510,14 +357,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-8" type="checkbox" id="nav-7-1-4-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-3" type="checkbox" id="nav-6-1-3">
     
-    <label class="md-nav__link" for="nav-7-1-4-8">
-       flat map policy
+    <label class="md-nav__link" for="nav-6-1-3">
+      Alltypes
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-8">
-         flat map policy
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-3">
+        Alltypes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -528,212 +375,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-flat-map-policy/" title="Index" class="md-nav__link">
+    <a href="../../alltypes/" title="Index" class="md-nav__link">
       Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flat-map-policy/-c-o-n-c-a-t/" title="c o n c a t" class="md-nav__link">
-       c o n c a t
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flat-map-policy/-l-a-t-e-s-t/" title="l a t e s t" class="md-nav__link">
-       l a t e s t
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flat-map-policy/-m-e-r-g-e/" title="m e r g e" class="md-nav__link">
-       m e r g e
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-9" type="checkbox" id="nav-7-1-4-9">
-    
-    <label class="md-nav__link" for="nav-7-1-4-9">
-       flow redux state machine
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-9">
-         flow redux state machine
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-state-machine/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-state-machine/-init-/" title="init" class="md-nav__link">
-       init 
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-state-machine/dispatch/" title="Dispatch" class="md-nav__link">
-      Dispatch
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-state-machine/spec/" title="Spec" class="md-nav__link">
-      Spec
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-state-machine/state/" title="State" class="md-nav__link">
-      State
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-10" type="checkbox" id="nav-7-1-4-10">
-    
-    <label class="md-nav__link" for="nav-7-1-4-10">
-       flow redux store builder
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-10">
-         flow redux store builder
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-store-builder/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-store-builder/-init-/" title="init" class="md-nav__link">
-       init 
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-store-builder/builder-blocks/" title="Builder blocks" class="md-nav__link">
-      Builder blocks
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-store-builder/in-state/" title="In state" class="md-nav__link">
-      In state
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../-flow-redux-store-builder/observe/" title="Observe" class="md-nav__link">
-      Observe
     </a>
   </li>
 
@@ -752,14 +395,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-11" type="checkbox" id="nav-7-1-4-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4" type="checkbox" id="nav-6-1-4" checked>
     
-    <label class="md-nav__link" for="nav-7-1-4-11">
-       in state builder block
+    <label class="md-nav__link" for="nav-6-1-4">
+      Com.freeletics.flowredux.dsl
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-11">
-         in state builder block
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-1-4">
+        Com.freeletics.flowredux.dsl
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -782,8 +425,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../-init-/" title="init" class="md-nav__link">
-       init 
+    <a href="../-in-state-observer-block/" title="in state observer block" class="md-nav__link">
+       in state observer block
     </a>
   </li>
 
@@ -794,8 +437,44 @@
 
 
   <li class="md-nav__item">
-    <a href="../_in-state-side-effect-builders/" title="in state side effect builders" class="md-nav__link">
-       in state side effect builders
+    <a href="../-in-state-on-enter-block/" title="in state on enter block" class="md-nav__link">
+       in state on enter block
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-side-effect-builder/" title="in state side effect builder" class="md-nav__link">
+       in state side effect builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-on-action-block/" title="on action block" class="md-nav__link">
+       on action block
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-store-wide-builder-block/" title="store wide builder block" class="md-nav__link">
+       store wide builder block
     </a>
   </li>
 
@@ -814,8 +493,8 @@
       
     
     
-    <a href="./" title="sub state class" class="md-nav__link md-nav__link--active">
-       sub state class
+    <a href="./" title="store wide collector block" class="md-nav__link md-nav__link--active">
+       store wide collector block
     </a>
     
   </li>
@@ -826,9 +505,28 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-8" type="checkbox" id="nav-6-1-4-8">
+    
+    <label class="md-nav__link" for="nav-6-1-4-8">
+       flat map policy
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-4-8">
+         flat map policy
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
-    <a href="../observe-while-in-state/" title="Observe while in state" class="md-nav__link">
-      Observe while in state
+    <a href="../-flat-map-policy/" title="Index" class="md-nav__link">
+      Index
     </a>
   </li>
 
@@ -839,7 +537,295 @@
 
 
   <li class="md-nav__item">
-    <a href="../on-enter/" title="On enter" class="md-nav__link">
+    <a href="../-flat-map-policy/-c-o-n-c-a-t/" title="c o n c a t" class="md-nav__link">
+       c o n c a t
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flat-map-policy/-l-a-t-e-s-t/" title="l a t e s t" class="md-nav__link">
+       l a t e s t
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flat-map-policy/-m-e-r-g-e/" title="m e r g e" class="md-nav__link">
+       m e r g e
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-9" type="checkbox" id="nav-6-1-4-9">
+    
+    <label class="md-nav__link" for="nav-6-1-4-9">
+       flow redux state machine
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-4-9">
+         flow redux state machine
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-state-machine/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-state-machine/-init-/" title="init" class="md-nav__link">
+       init 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-state-machine/dispatch/" title="Dispatch" class="md-nav__link">
+      Dispatch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-state-machine/spec/" title="Spec" class="md-nav__link">
+      Spec
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-state-machine/state/" title="State" class="md-nav__link">
+      State
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-10" type="checkbox" id="nav-6-1-4-10">
+    
+    <label class="md-nav__link" for="nav-6-1-4-10">
+       flow redux store builder
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-4-10">
+         flow redux store builder
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-store-builder/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-store-builder/-init-/" title="init" class="md-nav__link">
+       init 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-store-builder/builder-blocks/" title="Builder blocks" class="md-nav__link">
+      Builder blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-store-builder/collect-while-in-any-state/" title="Collect while in any state" class="md-nav__link">
+      Collect while in any state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-flow-redux-store-builder/in-state/" title="In state" class="md-nav__link">
+      In state
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-11" type="checkbox" id="nav-6-1-4-11">
+    
+    <label class="md-nav__link" for="nav-6-1-4-11">
+       in state builder block
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-6-1-4-11">
+         in state builder block
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/-init-/" title="init" class="md-nav__link">
+       init 
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/_in-state-side-effect-builders/" title="in state side effect builders" class="md-nav__link">
+       in state side effect builders
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/_is-in-state/" title="is in state" class="md-nav__link">
+       is in state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/collect-while-in-state/" title="Collect while in state" class="md-nav__link">
+      Collect while in state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../-in-state-builder-block/on-enter/" title="On enter" class="md-nav__link">
       On enter
     </a>
   </li>
@@ -851,7 +837,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../on/" title="On" class="md-nav__link">
+    <a href="../-in-state-builder-block/on/" title="On" class="md-nav__link">
       On
     </a>
   </li>
@@ -869,13 +855,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-12" type="checkbox" id="nav-7-1-4-12">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-12" type="checkbox" id="nav-6-1-4-12">
     
-    <label class="md-nav__link" for="nav-7-1-4-12">
+    <label class="md-nav__link" for="nav-6-1-4-12">
        on action in state side effect builder
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-12">
+      <label class="md-nav__title" for="nav-6-1-4-12">
          on action in state side effect builder
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -887,7 +873,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-on-action-in-state-side-effect-builder/" title="Index" class="md-nav__link">
+    <a href="../-on-action-in-state-side-effect-builder/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -899,7 +885,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-on-action-in-state-side-effect-builder/-init-/" title="init" class="md-nav__link">
+    <a href="../-on-action-in-state-side-effect-builder/-init-/" title="init" class="md-nav__link">
        init 
     </a>
   </li>
@@ -917,13 +903,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-13" type="checkbox" id="nav-7-1-4-13">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-13" type="checkbox" id="nav-6-1-4-13">
     
-    <label class="md-nav__link" for="nav-7-1-4-13">
+    <label class="md-nav__link" for="nav-6-1-4-13">
        on enter in state side effect builder
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-13">
+      <label class="md-nav__title" for="nav-6-1-4-13">
          on enter in state side effect builder
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -935,7 +921,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-on-enter-in-state-side-effect-builder/" title="Index" class="md-nav__link">
+    <a href="../-on-enter-in-state-side-effect-builder/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -947,7 +933,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-on-enter-in-state-side-effect-builder/-init-/" title="init" class="md-nav__link">
+    <a href="../-on-enter-in-state-side-effect-builder/-init-/" title="init" class="md-nav__link">
        init 
     </a>
   </li>
@@ -965,13 +951,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-14" type="checkbox" id="nav-7-1-4-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-14" type="checkbox" id="nav-6-1-4-14">
     
-    <label class="md-nav__link" for="nav-7-1-4-14">
+    <label class="md-nav__link" for="nav-6-1-4-14">
        set state
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-14">
+      <label class="md-nav__title" for="nav-6-1-4-14">
          set state
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -983,7 +969,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-set-state/" title="Index" class="md-nav__link">
+    <a href="../-set-state/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -995,7 +981,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-set-state/-init-/" title="init" class="md-nav__link">
+    <a href="../-set-state/-init-/" title="init" class="md-nav__link">
        init 
     </a>
   </li>
@@ -1007,7 +993,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../-set-state/invoke/" title="Invoke" class="md-nav__link">
+    <a href="../-set-state/invoke/" title="Invoke" class="md-nav__link">
       Invoke
     </a>
   </li>
@@ -1025,13 +1011,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-15" type="checkbox" id="nav-7-1-4-15">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-15" type="checkbox" id="nav-6-1-4-15">
     
-    <label class="md-nav__link" for="nav-7-1-4-15">
+    <label class="md-nav__link" for="nav-6-1-4-15">
       Kotlinx.coroutines.flow. flow
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-15">
+      <label class="md-nav__title" for="nav-6-1-4-15">
         Kotlinx.coroutines.flow. flow
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1043,7 +1029,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../kotlinx.coroutines.flow.-flow/" title="Index" class="md-nav__link">
+    <a href="../kotlinx.coroutines.flow.-flow/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1055,7 +1041,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../kotlinx.coroutines.flow.-flow/redux-store/" title="Redux store" class="md-nav__link">
+    <a href="../kotlinx.coroutines.flow.-flow/redux-store/" title="Redux store" class="md-nav__link">
       Redux store
     </a>
   </li>
@@ -1083,13 +1069,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
     
-    <label class="md-nav__link" for="nav-7-2">
+    <label class="md-nav__link" for="nav-6-2">
       Flowredux
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
+      <label class="md-nav__title" for="nav-6-2">
         Flowredux
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1101,7 +1087,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1114,13 +1100,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-6-2-2">
       Alltypes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-6-2-2">
         Alltypes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1132,7 +1118,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/alltypes/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/alltypes/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1150,13 +1136,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3" type="checkbox" id="nav-7-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
     
-    <label class="md-nav__link" for="nav-7-2-3">
+    <label class="md-nav__link" for="nav-6-2-3">
       Com.freeletics.flowredux
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-3">
+      <label class="md-nav__title" for="nav-6-2-3">
         Com.freeletics.flowredux
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1168,7 +1154,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1180,7 +1166,19 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-reducer/" title="reducer" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-get-state/" title="get state" class="md-nav__link">
+       get state
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../flowredux/com.freeletics.flowredux/-reducer/" title="reducer" class="md-nav__link">
        reducer
     </a>
   </li>
@@ -1192,20 +1190,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-side-effect/" title="side effect" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-side-effect/" title="side effect" class="md-nav__link">
        side effect
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-state-accessor/" title="state accessor" class="md-nav__link">
-       state accessor
     </a>
   </li>
 
@@ -1217,13 +1203,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-5" type="checkbox" id="nav-7-2-3-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-5" type="checkbox" id="nav-6-2-3-5">
     
-    <label class="md-nav__link" for="nav-7-2-3-5">
+    <label class="md-nav__link" for="nav-6-2-3-5">
        flow redux logger
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-5">
+      <label class="md-nav__title" for="nav-6-2-3-5">
          flow redux logger
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1235,7 +1221,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-flow-redux-logger/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-flow-redux-logger/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1247,7 +1233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-flow-redux-logger/log/" title="Log" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-flow-redux-logger/log/" title="Log" class="md-nav__link">
       Log
     </a>
   </li>
@@ -1265,13 +1251,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-6" type="checkbox" id="nav-7-2-3-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-6" type="checkbox" id="nav-6-2-3-6">
     
-    <label class="md-nav__link" for="nav-7-2-3-6">
+    <label class="md-nav__link" for="nav-6-2-3-6">
        reducer exception
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-6">
+      <label class="md-nav__title" for="nav-6-2-3-6">
          reducer exception
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1283,7 +1269,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-reducer-exception/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-reducer-exception/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1295,7 +1281,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/-reducer-exception/-init-/" title="init" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/-reducer-exception/-init-/" title="init" class="md-nav__link">
        init 
     </a>
   </li>
@@ -1313,13 +1299,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-7" type="checkbox" id="nav-7-2-3-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-7" type="checkbox" id="nav-6-2-3-7">
     
-    <label class="md-nav__link" for="nav-7-2-3-7">
+    <label class="md-nav__link" for="nav-6-2-3-7">
       Kotlinx.coroutines.flow. flow
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-7">
+      <label class="md-nav__title" for="nav-6-2-3-7">
         Kotlinx.coroutines.flow. flow
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1331,7 +1317,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/kotlinx.coroutines.flow.-flow/" title="Index" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/kotlinx.coroutines.flow.-flow/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -1343,7 +1329,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../flowredux/com.freeletics.flowredux/kotlinx.coroutines.flow.-flow/redux-store/" title="Redux store" class="md-nav__link">
+    <a href="../../../flowredux/com.freeletics.flowredux/kotlinx.coroutines.flow.-flow/redux-store/" title="Redux store" class="md-nav__link">
       Redux store
     </a>
   </li>
@@ -1396,12 +1382,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/freeletics/FlowRedux/edit/master/docs/Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/_sub-state-class.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/freeletics/FlowRedux/edit/master/docs/Javadoc/dsl/com.freeletics.flowredux.dsl/-store-wide-collector-block.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <p><a href="../../../">dsl</a> / <a href="../../">com.freeletics.flowredux.dsl</a> / <a href="../">InStateBuilderBlock</a> / <a href="./">_subStateClass</a></p>
-<h1 id="_substateclass">_subStateClass<a class="headerlink" href="#_substateclass" title="Permanent link">&para;</a></h1>
-<p>(jvm) <code>val _subStateClass:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><code>KClass</code></a><code>&lt;SubState&gt;</code></p>
+                <p><a href="../../">dsl</a> / <a href="../">com.freeletics.flowredux.dsl</a> / <a href="./">StoreWideCollectorBlock</a></p>
+<h1 id="storewidecollectorblock">StoreWideCollectorBlock<a class="headerlink" href="#storewidecollectorblock" title="Permanent link">&para;</a></h1>
+<p>(jvm) <code>typealias StoreWideCollectorBlock&lt;T, S&gt; = suspend (value: T, getState: GetState&lt;S&gt;, setState:</code><a href="../-set-state/"><code>SetState</code></a><code>&lt;S&gt;) -&gt;</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></p>
                 
                   
                 
@@ -1423,7 +1409,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../_in-state-side-effect-builders/" title="in state side effect builders" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../-store-wide-builder-block/" title="store wide builder block" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1432,19 +1418,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                 in state side effect builders
+                 store wide builder block
               </span>
             </div>
           </a>
         
         
-          <a href="../observe-while-in-state/" title="Observe while in state" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../-flat-map-policy/" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Observe while in state
+                Index
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1476,9 +1462,9 @@
       
     </div>
     
-      <script src="../../../../../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../../../../assets/javascripts/application.808e90bb.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../../../../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
       
     
   </body>

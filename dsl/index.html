@@ -42,7 +42,7 @@
     
     
       
-        <title>DSL - FlowRedux</title>
+        <title>DSL Guide - FlowRedux</title>
       
     
     
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#dsl" tabindex="1" class="md-skip">
+      <a href="#dsl-guide" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,7 +119,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                DSL
+                DSL Guide
               
             </span>
           
@@ -263,11 +263,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        DSL
+        DSL Guide
       </label>
     
-    <a href="./" title="DSL" class="md-nav__link md-nav__link--active">
-      DSL
+    <a href="./" title="DSL Guide" class="md-nav__link md-nav__link--active">
+      DSL Guide
     </a>
     
       
@@ -288,8 +288,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#instate" class="md-nav__link">
-    inState
+  <a href="#instatestate" class="md-nav__link">
+    inState&lt;State&gt;
   </a>
   
     <nav class="md-nav">
@@ -310,8 +310,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#observewhileinstate" class="md-nav__link">
-    observeWhileInState()
+  <a href="#collectwhileinstate" class="md-nav__link">
+    collectWhileInState()
   </a>
   
 </li>
@@ -322,8 +322,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#observe" class="md-nav__link">
-    observe
+  <a href="#custom-condition-for-instate" class="md-nav__link">
+    Custom condition for inState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectwhileinanystate" class="md-nav__link">
+    collectWhileInAnyState()
   </a>
   
 </li>
@@ -398,18 +405,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../logging/" title="Logging" class="md-nav__link">
-      Logging
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../multiplatform/" title="Multiplatform" class="md-nav__link">
       Multiplatform
     </a>
@@ -423,13 +418,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       Javadoc
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         Javadoc
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -442,13 +437,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
     
-    <label class="md-nav__link" for="nav-7-1">
+    <label class="md-nav__link" for="nav-6-1">
       Dsl
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-1">
+      <label class="md-nav__title" for="nav-6-1">
         Dsl
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -485,13 +480,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-3" type="checkbox" id="nav-7-1-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-3" type="checkbox" id="nav-6-1-3">
     
-    <label class="md-nav__link" for="nav-7-1-3">
+    <label class="md-nav__link" for="nav-6-1-3">
       Alltypes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-1-3">
+      <label class="md-nav__title" for="nav-6-1-3">
         Alltypes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -521,13 +516,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4" type="checkbox" id="nav-7-1-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4" type="checkbox" id="nav-6-1-4">
     
-    <label class="md-nav__link" for="nav-7-1-4">
+    <label class="md-nav__link" for="nav-6-1-4">
       Com.freeletics.flowredux.dsl
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-1-4">
+      <label class="md-nav__title" for="nav-6-1-4">
         Com.freeletics.flowredux.dsl
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -611,8 +606,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-store-wide-observer-block/" title="store wide observer block" class="md-nav__link">
-       store wide observer block
+    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-store-wide-collector-block/" title="store wide collector block" class="md-nav__link">
+       store wide collector block
     </a>
   </li>
 
@@ -624,13 +619,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-8" type="checkbox" id="nav-7-1-4-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-8" type="checkbox" id="nav-6-1-4-8">
     
-    <label class="md-nav__link" for="nav-7-1-4-8">
+    <label class="md-nav__link" for="nav-6-1-4-8">
        flat map policy
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-8">
+      <label class="md-nav__title" for="nav-6-1-4-8">
          flat map policy
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -696,13 +691,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-9" type="checkbox" id="nav-7-1-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-9" type="checkbox" id="nav-6-1-4-9">
     
-    <label class="md-nav__link" for="nav-7-1-4-9">
+    <label class="md-nav__link" for="nav-6-1-4-9">
        flow redux state machine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-9">
+      <label class="md-nav__title" for="nav-6-1-4-9">
          flow redux state machine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -780,13 +775,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-10" type="checkbox" id="nav-7-1-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-10" type="checkbox" id="nav-6-1-4-10">
     
-    <label class="md-nav__link" for="nav-7-1-4-10">
+    <label class="md-nav__link" for="nav-6-1-4-10">
        flow redux store builder
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-10">
+      <label class="md-nav__title" for="nav-6-1-4-10">
          flow redux store builder
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -834,8 +829,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-flow-redux-store-builder/in-state/" title="In state" class="md-nav__link">
-      In state
+    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-flow-redux-store-builder/collect-while-in-any-state/" title="Collect while in any state" class="md-nav__link">
+      Collect while in any state
     </a>
   </li>
 
@@ -846,8 +841,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-flow-redux-store-builder/observe/" title="Observe" class="md-nav__link">
-      Observe
+    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-flow-redux-store-builder/in-state/" title="In state" class="md-nav__link">
+      In state
     </a>
   </li>
 
@@ -864,13 +859,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-11" type="checkbox" id="nav-7-1-4-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-11" type="checkbox" id="nav-6-1-4-11">
     
-    <label class="md-nav__link" for="nav-7-1-4-11">
+    <label class="md-nav__link" for="nav-6-1-4-11">
        in state builder block
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-11">
+      <label class="md-nav__title" for="nav-6-1-4-11">
          in state builder block
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -918,8 +913,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/_sub-state-class/" title="sub state class" class="md-nav__link">
-       sub state class
+    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/_is-in-state/" title="is in state" class="md-nav__link">
+       is in state
     </a>
   </li>
 
@@ -930,8 +925,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/observe-while-in-state/" title="Observe while in state" class="md-nav__link">
-      Observe while in state
+    <a href="../Javadoc/dsl/com.freeletics.flowredux.dsl/-in-state-builder-block/collect-while-in-state/" title="Collect while in state" class="md-nav__link">
+      Collect while in state
     </a>
   </li>
 
@@ -972,13 +967,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-12" type="checkbox" id="nav-7-1-4-12">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-12" type="checkbox" id="nav-6-1-4-12">
     
-    <label class="md-nav__link" for="nav-7-1-4-12">
+    <label class="md-nav__link" for="nav-6-1-4-12">
        on action in state side effect builder
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-12">
+      <label class="md-nav__title" for="nav-6-1-4-12">
          on action in state side effect builder
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1020,13 +1015,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-13" type="checkbox" id="nav-7-1-4-13">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-13" type="checkbox" id="nav-6-1-4-13">
     
-    <label class="md-nav__link" for="nav-7-1-4-13">
+    <label class="md-nav__link" for="nav-6-1-4-13">
        on enter in state side effect builder
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-13">
+      <label class="md-nav__title" for="nav-6-1-4-13">
          on enter in state side effect builder
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1068,13 +1063,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-14" type="checkbox" id="nav-7-1-4-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-14" type="checkbox" id="nav-6-1-4-14">
     
-    <label class="md-nav__link" for="nav-7-1-4-14">
+    <label class="md-nav__link" for="nav-6-1-4-14">
        set state
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-14">
+      <label class="md-nav__title" for="nav-6-1-4-14">
          set state
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1128,13 +1123,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1-4-15" type="checkbox" id="nav-7-1-4-15">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1-4-15" type="checkbox" id="nav-6-1-4-15">
     
-    <label class="md-nav__link" for="nav-7-1-4-15">
+    <label class="md-nav__link" for="nav-6-1-4-15">
       Kotlinx.coroutines.flow. flow
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-1-4-15">
+      <label class="md-nav__title" for="nav-6-1-4-15">
         Kotlinx.coroutines.flow. flow
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1186,13 +1181,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
     
-    <label class="md-nav__link" for="nav-7-2">
+    <label class="md-nav__link" for="nav-6-2">
       Flowredux
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
+      <label class="md-nav__title" for="nav-6-2">
         Flowredux
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1217,13 +1212,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-6-2-2">
       Alltypes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-6-2-2">
         Alltypes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1253,13 +1248,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3" type="checkbox" id="nav-7-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
     
-    <label class="md-nav__link" for="nav-7-2-3">
+    <label class="md-nav__link" for="nav-6-2-3">
       Com.freeletics.flowredux
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-3">
+      <label class="md-nav__title" for="nav-6-2-3">
         Com.freeletics.flowredux
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1273,6 +1268,18 @@
   <li class="md-nav__item">
     <a href="../Javadoc/flowredux/com.freeletics.flowredux/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Javadoc/flowredux/com.freeletics.flowredux/-get-state/" title="get state" class="md-nav__link">
+       get state
     </a>
   </li>
 
@@ -1306,27 +1313,15 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="../Javadoc/flowredux/com.freeletics.flowredux/-state-accessor/" title="state accessor" class="md-nav__link">
-       state accessor
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-5" type="checkbox" id="nav-7-2-3-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-5" type="checkbox" id="nav-6-2-3-5">
     
-    <label class="md-nav__link" for="nav-7-2-3-5">
+    <label class="md-nav__link" for="nav-6-2-3-5">
        flow redux logger
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-5">
+      <label class="md-nav__title" for="nav-6-2-3-5">
          flow redux logger
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1368,13 +1363,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-6" type="checkbox" id="nav-7-2-3-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-6" type="checkbox" id="nav-6-2-3-6">
     
-    <label class="md-nav__link" for="nav-7-2-3-6">
+    <label class="md-nav__link" for="nav-6-2-3-6">
        reducer exception
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-6">
+      <label class="md-nav__title" for="nav-6-2-3-6">
          reducer exception
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1416,13 +1411,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-3-7" type="checkbox" id="nav-7-2-3-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3-7" type="checkbox" id="nav-6-2-3-7">
     
-    <label class="md-nav__link" for="nav-7-2-3-7">
+    <label class="md-nav__link" for="nav-6-2-3-7">
       Kotlinx.coroutines.flow. flow
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-7-2-3-7">
+      <label class="md-nav__title" for="nav-6-2-3-7">
         Kotlinx.coroutines.flow. flow
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1500,8 +1495,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#instate" class="md-nav__link">
-    inState
+  <a href="#instatestate" class="md-nav__link">
+    inState&lt;State&gt;
   </a>
   
     <nav class="md-nav">
@@ -1522,8 +1517,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#observewhileinstate" class="md-nav__link">
-    observeWhileInState()
+  <a href="#collectwhileinstate" class="md-nav__link">
+    collectWhileInState()
   </a>
   
 </li>
@@ -1534,8 +1529,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#observe" class="md-nav__link">
-    observe
+  <a href="#custom-condition-for-instate" class="md-nav__link">
+    Custom condition for inState
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectwhileinanystate" class="md-nav__link">
+    collectWhileInAnyState()
   </a>
   
 </li>
@@ -1600,7 +1602,7 @@
                   <a href="https://github.com/freeletics/FlowRedux/edit/master/docs/dsl.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="dsl">DSL<a class="headerlink" href="#dsl" title="Permanent link">&para;</a></h1>
+                <h1 id="dsl-guide">DSL Guide<a class="headerlink" href="#dsl-guide" title="Permanent link">&para;</a></h1>
 <p>FlowRedux provides a convenient DSL to describe your state machine.
 This page introduces you the DSL that you can use.</p>
 <p>To do that we will stick with a simple example of loading a list of items from a web service.
@@ -1652,7 +1654,7 @@ In our example we start with the <code>LoadingState</code>.</p>
 This is how you define the initial state of your state machine.
 Next, we already see that we need an <code>init {...}</code> block containing a <code>spec { ... }</code> block inside.
 The <code>spec { ... }</code> block is actually where we write our DSL inside.</p>
-<h2 id="instate">inState<a class="headerlink" href="#instate" title="Permanent link">&para;</a></h2>
+<h2 id="instatestate">inState<code>&lt;State&gt;</code><a class="headerlink" href="#instatestate" title="Permanent link">&para;</a></h2>
 <p>The first concept we learn is <code>inState</code></p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
@@ -1674,7 +1676,7 @@ Next let&rsquo;s discuss what an <code>inState</code> can contain as triggers to
 <ol>
 <li><code>onEnter</code>: Triggers whenever we enter that state</li>
 <li><code>on&lt;Action&gt;</code>: Triggers whenever we are in this state and the specified action is triggered from the outside by calling <code>FlowReduxStateMachine.dispatch(action)</code>.</li>
-<li><code>observeWhileInState( flow )</code>: You can subscribe to any arbitarry <code>Flow</code> while your state machine is in that state.</li>
+<li><code>collectWhileInState( flow )</code>: You can subscribe to any arbitrary <code>Flow</code> while your state machine is in that state.</li>
 </ol>
 <p>Let&rsquo;s try to go through them as we build our state machine:</p>
 <h3 id="onenter">onEnter<a class="headerlink" href="#onenter" title="Permanent link">&para;</a></h3>
@@ -1773,7 +1775,7 @@ You can totally run here long running and expensive calls (like doing an http re
 <li><strong><code>on&lt;MyAction&gt; { ... }</code> doesn&rsquo;t get canceled</strong> when the state machine transitioned to another state original state.
 See <a href="#onenter">onEnter</a> section for more details.</li>
 </ul>
-<h3 id="observewhileinstate">observeWhileInState()<a class="headerlink" href="#observewhileinstate" title="Permanent link">&para;</a></h3>
+<h3 id="collectwhileinstate">collectWhileInState()<a class="headerlink" href="#collectwhileinstate" title="Permanent link">&para;</a></h3>
 <p>This one is useful if you want to collect a <code>Flow</code> only while being exactly in that state.
 To give a concrete example how this is useful let&rsquo;s extend our example from above.
 Let&rsquo;s say whenever our state machine is in <code>ErrorState</code> we want to retry loading the items after
@@ -1786,7 +1788,7 @@ Furthermore the 3 seconds countdown timer should be displayed in our app:</p>
 <span class="p">)</span> <span class="p">:</span> <span class="n">State</span><span class="p">()</span>
 </pre></div>
 
-<p>Now let&rsquo;s add some countdown capabilities to our state machine by using <code>observeWhileInState()</code>:</p>
+<p>Now let&rsquo;s add some countdown capabilities to our state machine by using <code>collectWhileInState()</code>:</p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
 <span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
@@ -1811,7 +1813,7 @@ Furthermore the 3 seconds countdown timer should be displayed in our app:</p>
                <span class="p">}</span>
 
                <span class="k">val</span> <span class="py">timer</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">timerThatEmitsEverySecond</span><span class="p">()</span>
-               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+               <span class="n">collectWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
                     <span class="c1">// This block triggers every time the timer emits</span>
                     <span class="c1">// which happens every second</span>
                     <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
@@ -1843,22 +1845,96 @@ Whenever we are in <code>LoadingState</code> and an error occurs while loading t
 <code>ErrorState</code>. Nothing new.
 What is new is that <code>ErrorState</code> contains an additional field  <code>countdown</code> which we set on
 transitioning from <code>LoadingState</code> to <code>ErrorState(countdown = 3)</code> (means 3 seconds left).</p>
-<p>We extend <code>inState&lt;ErrorState&gt; { ... }</code> block and add a <code>observeWhileInState(timer)</code>.
+<p>We extend <code>inState&lt;ErrorState&gt; { ... }</code> block and add a <code>collectWhileInState(timer)</code>.
 <code>timer</code> is a <code>Flow&lt;Int&gt;</code> that emits a new (incremented) number every second.
-<code>observeWhileInState(timer)</code> calls <code>.collect {...}</code> on the timer flow and executes the block with the
+<code>collectWhileInState(timer)</code> calls <code>.collect {...}</code> on the timer flow and executes the block with the
 parameters <code>value</code>, <code>getState</code> and <code>setState</code> every time <code>timer</code> emits a new value.
-In other words: instead of calling <code>timer.collect { ... }</code> you call <code>observeWhileInState(timer) { ... }</code> to collect the Flow&rsquo;s values as long as the state machine is in that state.</p>
+In other words: instead of calling <code>timer.collect { ... }</code> you call <code>collectWhileInState(timer) { ... }</code> to collect the Flow&rsquo;s values as long as the state machine is in that state.</p>
 <p>But here is the deal: it automatically cancels the timer once the state machine transitioned away from
 <code>ErrorState</code> into another state.
 This happens either when the user clicks on the retry button and causes <code>on&lt;RetryLoadingAction&gt;</code> to be dispatched
 or when 3 seconds have elapsed.
 To keep track how many seconds are left we decrease <code>ErrorState.countdown</code> field after every second until we reached zero.
 On zero we call <code>setState { LoadingState }</code> to do the state transition.</p>
-<p><code>observeWhileInState(anyFlow) { value, getState, setState -&gt; ... }</code> has 3 parameters:
+<p><code>collectWhileInState(anyFlow) { value, getState, setState -&gt; ... }</code> has 3 parameters:
 <code>value</code> is the value emitted by the flow, <a href="#getstate">getState</a> to get the current state and <a href="#setState">setState</a> to do a state transition.</p>
-<p>In contrast to <code>onEnter</code> and <code>on&lt;Action&gt;</code> block <code>observeWhileInState()</code> block stops the execution once the state machine is not in the original <code>inState&lt;State&gt;</code> anymore.</p>
-<h2 id="observe">observe<a class="headerlink" href="#observe" title="Permanent link">&para;</a></h2>
-<p>If for whatever reason you want to trigger a state change out of  <code>inState&lt;&gt;</code>, <code>onEnter { ... }</code>, <code>on&lt;Action&gt;</code> or <code>observeWhileInState { ... }</code> by observing a <code>Flow</code> then <code>observe</code> is what you are looking for:</p>
+<p>In contrast to <code>onEnter</code> and <code>on&lt;Action&gt;</code> block <code>collectWhileInState()</code> block stops the execution once the state machine is not in the original <code>inState&lt;State&gt;</code> anymore.</p>
+<h2 id="custom-condition-for-instate">Custom condition for inState<a class="headerlink" href="#custom-condition-for-instate" title="Permanent link">&para;</a></h2>
+<p>We already covered <code>inState&lt;State&gt;</code> that builds upon the recommended best practice that every State
+in your state machine is expressed us it&rsquo;s own type in Kotlin.
+Again, this is a best practice and the recommended way.</p>
+<p>Sometimes, however, you need a bit more flexibility then just relaying on type.
+For that use case you can use <code>inState(isInState: (State) -&gt; Boolean)</code>.</p>
+<p>Example: One could have also modeled the state for our example above as the following:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// TO MODEL YOUR STATE LIKE THIS IS NOT BEST PRACTICE! Use sealed class instead.</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">State</span> <span class="p">(</span>
+    <span class="k">val</span> <span class="py">loading</span> <span class="p">:</span> <span class="n">Boolean</span><span class="p">,</span> <span class="c1">// true means loading, false means not loading</span>
+    <span class="k">val</span> <span class="py">items</span> <span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Items</span><span class="p">&gt;,</span> <span class="c1">// empty list if no items loaded yet</span>
+    <span class="k">val</span> <span class="py">error</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">?,</span> <span class="c1">// if not null we are in error state</span>
+    <span class="k">val</span> <span class="py">errorCountDown</span> <span class="p">:</span> <span class="n">Int</span><span class="p">?</span> <span class="c1">// the seconds for the error countdown</span>
+<span class="p">)</span>
+</pre></div>
+
+<p><strong>AGAIN, the example shown above is not the recommended way.
+We strongly recommend to use sealed classes instead to model state as shown at the beginning of this document.</strong></p>
+<p>We just do this for demo purpose to demonstrate a way how to customize <code>inState</code>.
+Given the state from above, what we can do now with our DSL is the following:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">State</span><span class="p">(</span><span class="n">loading</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">items</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">(),</span> <span class="n">error</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">errorCountDown</span> <span class="p">=</span> <span class="k">null</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="n">spec</span> <span class="p">{</span>
+            <span class="n">inState</span><span class="p">(</span> <span class="n">isInState</span> <span class="p">=</span> <span class="p">{</span><span class="n">state</span> <span class="p">-&gt;</span> <span class="n">state</span><span class="p">.</span><span class="n">loading</span> <span class="p">==</span> <span class="k">true</span><span class="p">}</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="n">onEnter</span> <span class="p">{</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// we entered the LoadingState, so let&#39;s do the http request</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
+                        <span class="n">setState</span> <span class="p">{</span>
+                            <span class="n">State</span><span class="p">(</span><span class="n">loading</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="n">items</span> <span class="p">=</span> <span class="n">items</span><span class="p">,</span> <span class="n">error</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">errorCountdown</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span> <span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">setState</span> <span class="p">{</span>
+                            <span class="n">State</span><span class="p">(</span><span class="n">loading</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span> <span class="n">items</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">(),</span> <span class="n">error</span> <span class="p">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">errorCountdown</span> <span class="p">=</span> <span class="m">3</span><span class="p">)</span>
+                        <span class="p">}</span> <span class="c1">// Countdown starts with 3 seconds</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="n">inState</span><span class="p">(</span> <span class="n">isInState</span> <span class="p">=</span> <span class="p">{</span><span class="n">state</span> <span class="p">-&gt;</span> <span class="n">state</span><span class="p">.</span><span class="n">error</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">}</span> <span class="p">)</span> <span class="p">{</span>
+               <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">action</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                  <span class="n">setState</span> <span class="p">{</span>
+                     <span class="n">State</span><span class="p">(</span><span class="n">loading</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">items</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">(),</span> <span class="n">error</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">errorCountdown</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+                  <span class="p">}</span>
+               <span class="p">}</span>
+
+               <span class="k">val</span> <span class="py">timer</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">timerThatEmitsEverySecond</span><span class="p">()</span>
+               <span class="n">collectWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+                    <span class="c1">// This block triggers every time the timer emits</span>
+                    <span class="c1">// which happens every second</span>
+                    <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
+                    <span class="k">val</span> <span class="py">countdownTimeLeft</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">errorCountdown</span><span class="o">!!</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">countdownTimeLeft</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+                        <span class="n">setState</span> <span class="p">{</span> <span class="n">state</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">errorCountdown</span> <span class="p">=</span> <span class="n">countdownTimeLeft</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">}</span> <span class="c1">//  decrease the countdown by 1 second</span>
+                    <span class="k">else</span>
+                        <span class="n">setState</span> <span class="p">{</span>
+                          <span class="n">State</span><span class="p">(</span><span class="n">loading</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">items</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">(),</span> <span class="n">error</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">errorCountdown</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="c1">// transition to the LoadingState</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Instead of <code>inState&lt;State&gt; { ... }</code> we can use another version of <code>inState</code> name that instead of
+generics take a lambda as parameter that looks like <code>(State) -&gt; Boolean</code> so that.
+If that lambda returns <code>true</code> it means we are in that state, otherwise not (returning false).
+The rest still remains the same.
+You can use <code>onEnter</code>, <code>on&lt;Action&gt;</code> and <code>collectWhileInState</code> the exact way as you already know.</p>
+<h2 id="collectwhileinanystate">collectWhileInAnyState()<a class="headerlink" href="#collectwhileinanystate" title="Permanent link">&para;</a></h2>
+<p>If for whatever reason you want to trigger a state change out of  <code>inState&lt;&gt;</code>, <code>onEnter { ... }</code>, <code>on&lt;Action&gt;</code> or <code>collectWhileInState { ... }</code> by observing a <code>Flow</code> then <code>collectWhileInAnyState</code> is what you are looking for:</p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyStateMachine</span><span class="p">(</span>
     <span class="k">private</span> <span class="k">val</span> <span class="py">httpClient</span><span class="p">:</span> <span class="n">HttpClient</span>
 <span class="p">)</span> <span class="p">:</span> <span class="n">FlowReduxStateMachine</span><span class="p">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">Action</span><span class="p">&gt;(</span><span class="n">initialState</span> <span class="p">=</span> <span class="n">LoadingState</span><span class="p">)</span> <span class="p">{</span>
@@ -1876,18 +1952,18 @@ On zero we call <code>setState { LoadingState }</code> to do the state transitio
                   <span class="p">...</span>
                <span class="p">}</span>
 
-               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+               <span class="n">collectWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
                   <span class="p">...</span>
                <span class="p">}</span>
             <span class="p">}</span>
 
             <span class="k">val</span> <span class="py">aFlow</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">flowOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)</span>
-            <span class="n">observe</span><span class="p">(</span> <span class="n">aFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+            <span class="n">collectWhileInAnyState</span><span class="p">(</span> <span class="n">aFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
                 <span class="c1">// Will trigger anytime flow emits a value</span>
                 <span class="p">...</span>
             <span class="p">}</span>
 
-            <span class="n">observe</span><span class="p">(</span> <span class="n">anotherFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+            <span class="n">collectWhileInAnyState</span><span class="p">(</span> <span class="n">anotherFlow</span> <span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
                 <span class="c1">// Will trigger anytime flow emits a value</span>
                <span class="p">...</span>
             <span class="p">}</span>
@@ -1896,8 +1972,8 @@ On zero we call <code>setState { LoadingState }</code> to do the state transitio
 <span class="p">}</span>
 </pre></div>
 
-<p><code>observe()</code> is like <code>observeWhileInState()</code> just that it is not bound to the current state like <code>observeWhileInState()</code> is.
-<code>observe()</code> will stop collecting the passed in Flow only if the CoroutineScope of the whole FlowReduxStateMachine gets canceled.</p>
+<p><code>collectWhileInAnyState()</code> is like <code>collectWhileInState()</code> just that it is not bound to the current state like <code>collectWhileInState()</code> is.
+<code>collectWhileInAnyState()</code> will stop collecting the passed in Flow only if the CoroutineScope of the whole FlowReduxStateMachine gets canceled.</p>
 <h2 id="setstate">SetState<a class="headerlink" href="#setstate" title="Permanent link">&para;</a></h2>
 <p>As you probably have already noticed from the sections above <code>setState</code> is a way to make you state machine transition to another state.
 You can think of <code>SetState</code> as a function that gets the current state as input parameter and returns
@@ -1973,7 +2049,7 @@ So if <code>on&lt;BarAction&gt;</code> gets executed two times it will run in pa
 <ul>
 <li><code>on&lt;Action&gt;(flatMapPolicy = FlatMapPolicy.LATEST){... }</code></li>
 <li><code>onEnter(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
-<li><code>observeWhileInState(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
+<li><code>collectWhileInState(flatMapPolicy = FlatMapPolicy.LATEST) { ... }</code></li>
 </ul>
 <h2 id="best-practice">Best Practice<a class="headerlink" href="#best-practice" title="Permanent link">&para;</a></h2>
 <p>One very important aspect of the DSL is to provide a readable and maintainable way to reason about your state machine.
@@ -2002,7 +2078,7 @@ Let&rsquo; take a look at our example state machine:</p>
                <span class="p">}</span>
 
                <span class="k">val</span> <span class="py">timer</span> <span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">timerThatEmitsEverySecond</span><span class="p">()</span>
-               <span class="n">observeWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
+               <span class="n">collectWhileInState</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="p">{</span> <span class="n">value</span><span class="p">,</span> <span class="n">getState</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
                     <span class="c1">// This block triggers every time the timer emits</span>
                     <span class="c1">// which happens every second</span>
                     <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
@@ -2052,11 +2128,11 @@ Let&rsquo;s refactor the example above to reflect this idea:</p>
 
             <span class="n">inState</span><span class="p">&lt;</span><span class="n">ErrorState</span><span class="p">&gt;</span> <span class="p">{</span>
                <span class="n">on</span><span class="p">&lt;</span><span class="n">RetryLoadingAction</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">setState</span> <span class="p">-&gt;</span>
-                  <span class="c1">// For a single line statement it&#39;s fine to keep it as a block instead of moving to a function reference</span>
+                  <span class="c1">// For a single line statement it&#39;s ok to keep the block instead of moving to a function reference</span>
                   <span class="n">setState</span> <span class="p">{</span> <span class="n">LoadingState</span> <span class="p">}</span>
                <span class="p">}</span>
 
-               <span class="n">observeWhileInState</span><span class="p">(</span>
+               <span class="n">collectWhileInState</span><span class="p">(</span>
                     <span class="n">timerThatEmitsEverySecond</span><span class="p">(),</span>
                     <span class="o">::</span><span class="n">onSecondElapsedMoveToLoadingStateOrMoveToDecrementCountdown</span>
                <span class="p">)</span>
@@ -2069,7 +2145,7 @@ Let&rsquo;s refactor the example above to reflect this idea:</p>
     <span class="c1">// All the implementation details are in the functions below.</span>
     <span class="c1">//</span>
 
-    <span class="k">private</span> <span class="k">fun</span> <span class="nf">loadItemsAndMoveToContentOrErrorState</span><span class="p">(</span><span class="n">getState</span> <span class="p">:</span> <span class="n">StateAccessor</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span> <span class="n">setState</span> <span class="p">:</span> <span class="n">SetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;){</span>
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">loadItemsAndMoveToContentOrErrorState</span><span class="p">(</span><span class="n">getState</span> <span class="p">:</span> <span class="n">GetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span> <span class="n">setState</span> <span class="p">:</span> <span class="n">SetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;){</span>
         <span class="k">try</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">httpClient</span><span class="p">.</span><span class="n">loadItems</span><span class="p">()</span>
             <span class="n">setState</span> <span class="p">{</span> <span class="n">ShowContentState</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
@@ -2080,7 +2156,7 @@ Let&rsquo;s refactor the example above to reflect this idea:</p>
 
     <span class="k">private</span> <span class="k">fun</span> <span class="nf">onSecondElapsedMoveToLoadingStateOrMoveToDecrementCountdown</span><span class="p">(</span>
         <span class="n">value</span> <span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-        <span class="n">getState</span> <span class="p">:</span> <span class="n">StateAccessor</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span>
+        <span class="n">getState</span> <span class="p">:</span> <span class="n">GetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;,</span>
         <span class="n">setState</span> <span class="p">:</span> <span class="n">SetState</span><span class="p">&lt;</span><span class="n">State</span><span class="p">&gt;</span>
     <span class="p">){</span>
         <span class="k">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">getState</span><span class="p">()</span>
